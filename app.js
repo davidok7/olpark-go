@@ -296,8 +296,10 @@ function renderAll() {
 function init() {
   buildHourSelect();
   const t = todayStr();
-  STATE.date = t;
-  const evs = eventsOn(t);
+  const sortedEvs = [...EVENTS].sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
+  const nextEv = sortedEvs.find((e) => e.date >= t) || sortedEvs[sortedEvs.length - 1];
+  STATE.date = eventsOn(t).length ? t : (nextEv ? nextEv.date : t);
+  const evs = eventsOn(STATE.date);
   const nowH = new Date().getHours();
   STATE.hour = evs.length ? clamp(Math.floor(toMin(evs[0].start) / 60) - 1, 0, 23) : clamp(nowH, 9, 20);
   if (evs.length) STATE.venue = evs[0].venue;

@@ -22,7 +22,7 @@ const VENUES = {
 /* ---- 공연 일정 -----------------------------------------------------------
    출처: 올림픽공원 문화공간 > 일정안내(2026-11-21 확인).
    ※ 공공데이터 3037877(올림픽공원 공연정보) API 연동 대상이며, 프로토타입에는
-      공개된 2026년 11월 일정만 수록함. 관람객 수는 좌석수·공연형태 기반 추정치.
+      공개된 2026년 11월~12월 일정을 수록함. 관람객 수는 좌석수·공연형태 기반 추정치.
    ------------------------------------------------------------------------ */
 const EVENTS = [
   { date: '2026-11-21', venue: 'KSPO',  title: '2026-27 로이킴 LIVE TOUR [R:O:Y] in SEOUL', start: '18:00', end: '20:00', attendance: 11500 },
@@ -35,7 +35,31 @@ const EVENTS = [
   { date: '2026-11-28', venue: 'WOORI', title: '최현우 30주년 기념 공연 - LEGACY',            start: '19:00', end: '21:00', attendance: 1100 },
   { date: '2026-11-29', venue: 'KSPO',  title: '[서울] 2026 조용필 & 위대한탄생 콘서트',      start: '17:00', end: '19:00', attendance: 12000 },
   { date: '2026-11-29', venue: 'HALL',  title: '2026 다이나믹 듀오 단독 콘서트 "가끔씩 오래 보자"', start: '17:00', end: '19:00', attendance: 2300 },
-  { date: '2026-11-29', venue: 'WOORI', title: '최현우 30주년 기념 공연 - LEGACY',            start: '14:00', end: '16:00', attendance: 1100 }
+  { date: '2026-11-29', venue: 'WOORI', title: '최현우 30주년 기념 공연 - LEGACY',            start: '14:00', end: '16:00', attendance: 1100 },
+  { date: '2026-12-04', venue: 'KSPO',  title: '[서울] 2026 이승철 40주년 콘서트 [THE VOICE]', start: '19:30', end: '21:30', attendance: 11500 },
+  { date: '2026-12-05', venue: 'KSPO',  title: '[서울] 2026 이승철 40주년 콘서트 [THE VOICE]', start: '18:00', end: '20:00', attendance: 12000 },
+  { date: '2026-12-05', venue: 'HALL',  title: '2026 비(RAIN) 콘서트 [THE SMOKE]',             start: '18:00', end: '20:00', attendance: 2300 },
+  { date: '2026-12-06', venue: 'KSPO',  title: '[서울] 2026 이승철 40주년 콘서트 [THE VOICE]', start: '17:00', end: '19:00', attendance: 11500 },
+  { date: '2026-12-06', venue: 'HALL',  title: '2026 비(RAIN) 콘서트 [THE SMOKE]',             start: '17:00', end: '19:00', attendance: 2300 },
+  { date: '2026-12-11', venue: 'HALL',  title: '2026 박지현 팬콘서트 〈박지현 어워즈〉',         start: '19:30', end: '21:30', attendance: 2300 },
+  { date: '2026-12-12', venue: 'KSPO',  title: '2026 DAVICHI CONCERT 〈IN OUR SCENES〉',       start: '18:00', end: '20:00', attendance: 12000 },
+  { date: '2026-12-12', venue: 'HALL',  title: '2026 박지현 팬콘서트 〈박지현 어워즈〉',         start: '18:00', end: '20:00', attendance: 2300 },
+  { date: '2026-12-13', venue: 'KSPO',  title: '2026 DAVICHI CONCERT 〈IN OUR SCENES〉',       start: '17:00', end: '19:00', attendance: 11500 },
+  { date: '2026-12-13', venue: 'HALL',  title: '2026 박지현 팬콘서트 〈박지현 어워즈〉',         start: '17:00', end: '19:00', attendance: 2300 },
+  { date: '2026-12-18', venue: 'KSPO',  title: "2026 DAY6 Special Concert 'The Present'",       start: '19:00', end: '21:30', attendance: 13500 },
+  { date: '2026-12-18', venue: 'HALL',  title: '자우림 단독 콘서트 [MIDNIGHT EXPRESS]',         start: '20:00', end: '22:00', attendance: 2300 },
+  { date: '2026-12-19', venue: 'KSPO',  title: "2026 DAY6 Special Concert 'The Present'",       start: '18:00', end: '20:30', attendance: 13500 },
+  { date: '2026-12-19', venue: 'HALL',  title: '자우림 단독 콘서트 [MIDNIGHT EXPRESS]',         start: '18:00', end: '20:00', attendance: 2300 },
+  { date: '2026-12-20', venue: 'KSPO',  title: "2026 DAY6 Special Concert 'The Present'",       start: '17:00', end: '19:30', attendance: 13500 },
+  { date: '2026-12-20', venue: 'HALL',  title: '자우림 단독 콘서트 [MIDNIGHT EXPRESS]',         start: '17:00', end: '19:00', attendance: 2300 },
+  { date: '2026-12-24', venue: 'KSPO',  title: 'THE BOYZ 2026 콘서트 〈ZENERATION Ⅲ〉',         start: '19:00', end: '21:30', attendance: 13000 },
+  { date: '2026-12-24', venue: 'HALL',  title: '2026 박진영 콘서트 〈WET〉',                    start: '19:30', end: '21:30', attendance: 2300 },
+  { date: '2026-12-25', venue: 'KSPO',  title: 'THE BOYZ 2026 콘서트 〈ZENERATION Ⅲ〉',         start: '18:00', end: '20:30', attendance: 13000 },
+  { date: '2026-12-25', venue: 'HALL',  title: '2026 박진영 콘서트 〈WET〉',                    start: '18:00', end: '20:00', attendance: 2300 },
+  { date: '2026-12-26', venue: 'KSPO',  title: 'THE BOYZ 2026 콘서트 〈ZENERATION Ⅲ〉',         start: '18:00', end: '20:30', attendance: 13000 },
+  { date: '2026-12-26', venue: 'HALL',  title: '2026 박진영 콘서트 〈WET〉',                    start: '18:00', end: '20:00', attendance: 2300 },
+  { date: '2026-12-27', venue: 'KSPO',  title: 'THE BOYZ 2026 콘서트 〈ZENERATION Ⅲ〉',         start: '17:00', end: '19:30', attendance: 12500 },
+  { date: '2026-12-31', venue: 'KSPO',  title: '2026 성시경 연말 콘서트 〈성시경〉',              start: '21:00', end: '23:30', attendance: 13000 }
 ];
 
 /* ---- 주차 구역 -----------------------------------------------------------
