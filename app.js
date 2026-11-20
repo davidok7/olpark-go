@@ -179,6 +179,7 @@ function renderAll() {
   badge.textContent = lv.label;
   badge.style.background = lv.color;
   $('#gaugeFill').style.width = oc.pct + '%';
+  $('#gaugeFill').style.background = lv.k === 1 ? 'var(--l1)' : lv.k === 2 ? 'var(--l2)' : lv.k === 3 ? 'var(--l3)' : 'var(--l4)';
 
   const adv = arrivalAdvice(date);
   let text;
@@ -239,8 +240,8 @@ function renderAll() {
 
   const good = ranked.filter((z) => z.occ < 90);
   $('#bestZone').innerHTML = `
-    <div class="bname">${best.id} · ${best.name.split('(')[1] ? best.name.split('(')[1].replace(')', '') : best.name}</div>
-    <div class="bmeta">${best.name} · ${best.gate} 입차 · 도보 ${best.walkMin}분</div>
+    <div class="bname">${best.id} 주차장</div>
+    <div class="bmeta">${best.name} · ${best.gate} 입차 · 공연장까지 도보 ${best.walkMin}분</div>
     <div class="brow">
       <div><b>${best.occ}%</b>예상 점유율</div>
       <div><b>${best.wait}분</b>예상 대기</div>
@@ -250,12 +251,16 @@ function renderAll() {
       ? '이 시간대 모든 구역이 만차에 가깝습니다. 주차 후 이동보다 지하철 전환이 빠릅니다.'
       : `공연장 인접 구역보다 점유율이 ${Math.max(0, ranked[ranked.length - 1].occ - best.occ)}%p 낮고, 도보 부담이 적어 가장 유리합니다.${good.length <= 2 ? ' 대안 구역이 거의 없어 서둘러 도착하는 편이 좋습니다.' : ''}`}</div>`;
 
-  $('#subwayList').innerHTML = SUBWAY.map((s) => `
-    <div class="sub ${s.mul < 1.2 ? 'rec' : ''}">
+  const busy = oc.pct >= 80;
+  $('#subwayList').innerHTML = SUBWAY.map((s) => {
+    const main = s.mul < 1.2;                       // 올림픽공원역 = 가장 가까운 역
+    const tag = busy ? (main ? '혼잡 예상' : '권장') : '대안';
+    return `<div class="sub ${busy && !main ? 'rec' : ''}">
       <div class="sname">${s.station} <span class="tag">${s.crowd}</span></div>
       <div class="smeta">${s.lines} · ${s.exit} · 공연장 도보 ${s.walk[venue === 'none' ? 'KSPO' : venue]}분</div>
-      <div class="swalk"><span>${oc.pct >= 80 ? '권장' : '대안'}</span><span>막차 확인 필요</span></div>
-    </div>`).join('');
+      <div class="swalk"><span>${tag}</span><span>막차 확인 필요</span></div>
+    </div>`;
+  }).join('');
 
   $('#courseBefore').innerHTML = COURSES.before.map((c) => `
     <li><b>${c.title} <em>${c.min}분</em></b><span>${c.desc}</span></li>`).join('');
