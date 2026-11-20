@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
-<base href="https://cdn.jsdelivr.net/gh/davidok7/olpark-go@main/">
+<base href="https://cdn.jsdelivr.net/gh/davidok7/olpark-go@73b2568/">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>올팍 Go! — 올림픽공원 주차 혼잡도 예측·맞춤 방문 가이드</title>
 <meta name="description" content="공연·날씨·입출차 공공데이터를 결합해 올림픽공원 방문 시간대별 주차 혼잡도를 예측하고, 구역별 추천 주차장과 우회 지하철 동선을 안내합니다." />
@@ -217,7 +217,7 @@
     <div class="card">
       <h2>혼잡도 예측 로직</h2>
       <pre class="formula">점유율(h) = min(100, [ 기본수요(h) + 공연수요(h) × 날씨계수 ] / 전체 주차면 × 100)
-공연수요(h) = Σ (관람객수 × 자가용분담률 0.30 ÷ 평균승차인원 2.6)
+공연수요(h) = Σ (관람객수 × 자가용분담률 0.22 ÷ 평균승차인원 2.8)
               × 도착·출차 분포(공연 3시간 전 ~ 종료 후 90분)
 기본수요(h) = 2025년 연계데이터 시간대별 입차 구성(주중/금/토/일)
 구역점유율 = (구역면 × 기본점유 + 공연차량 × 근접도 가중치) ÷ 구역면
