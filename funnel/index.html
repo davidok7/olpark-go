@@ -147,6 +147,20 @@
   }
   .go:active{transform:scale(.99);filter:brightness(1.05)}
   .micro{text-align:center;color:var(--muted);font-size:12px;margin-top:10px;font-weight:600}
+  /* quick links right under the primary button */
+  .quickbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:7px;margin-top:12px}
+  .qlink{
+    appearance:none;cursor:pointer;font-family:inherit;text-decoration:none;
+    display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:9px 13px;
+    border-radius:999px;border:1px solid var(--line);background:var(--card-2);color:var(--text);
+    font-size:12.5px;font-weight:750;letter-spacing:-.01em;
+    transition:border-color .15s, background .15s, transform .08s;
+  }
+  .qlink:active{transform:scale(.985)}
+  .qlink:hover{border-color:rgba(108,140,255,.55)}
+  .qsep{color:var(--muted);font-size:11px;font-weight:700}
+  #toolChips .chip{font-size:13px;padding:9px 12px;min-height:40px;border-radius:11px;gap:6px}
+  .chips-note{margin-top:8px;color:var(--muted);font-size:11.5px;font-weight:600;line-height:1.55;letter-spacing:-.005em}
   /* result */
   #result{margin-top:20px}
   .reveal{animation:rise .45s cubic-bezier(.2,.7,.3,1) both}
@@ -219,7 +233,7 @@
     <div class="hero">
       <div class="kicker">⏱ 10초 진단 · 설치 없음</div>
       <h1>1인 대표<br><span class="grad">AI 자동화 10초 진단기</span></h1>
-      <p class="sub">막혀 있는 반복 업무 3가지만 고르면 — AI로 돌려받을 수 있는 시간과, 오늘 바로 챗지피티에 붙여넣을 <b>합본 프롬프트</b>가 나옵니다.</p>
+      <p class="sub">막혀 있는 반복 업무 3가지만 고르면 — AI로 돌려받을 수 있는 시간과, 오늘 바로 쓰시는 AI에 붙여넣을 <b>합본 프롬프트</b>가 나옵니다.</p>
     </div>
   </header>
 
@@ -256,13 +270,25 @@
       <div class="hint">복수 선택 가능</div>
     </div>
     <div class="chips" id="toolChips" role="group" aria-label="사용 중인 도구 선택">
-      <button class="chip" type="button" data-tool="스마트스토어·쿠팡" aria-pressed="false">스마트스토어·쿠팡</button>
-      <button class="chip" type="button" data-tool="엑셀·스프레드시트" aria-pressed="false">엑셀·스프레드시트</button>
-      <button class="chip" type="button" data-tool="챗지피티" aria-pressed="false">챗지피티</button>
-      <button class="chip" type="button" data-tool="손으로 직접 (도구 없음)" aria-pressed="false">손으로 직접</button>
+      <button class="chip" type="button" data-tool="챗지피티" data-bonus="2" aria-pressed="false">챗지피티</button>
+      <button class="chip" type="button" data-tool="OpenAI 코덱스(Codex)" data-bonus="3" aria-pressed="false">OpenAI 코덱스(Codex)</button>
+      <button class="chip" type="button" data-tool="제미나이(Gemini)" data-bonus="2" aria-pressed="false">제미나이(Gemini)</button>
+      <button class="chip" type="button" data-tool="클로드 · 클로드 코드" data-bonus="3" aria-pressed="false">클로드 · 클로드 코드</button>
+      <button class="chip" type="button" data-tool="피클(Pickle AI)" data-bonus="3" aria-pressed="false">피클(Pickle AI)</button>
+      <button class="chip" type="button" data-tool="모바일 AI 에이전트 앱" data-bonus="2" aria-pressed="false" title="예: 폰에서 도는 AI 비서·자동화 앱">모바일 AI 에이전트 앱</button>
+      <button class="chip" type="button" data-tool="노션 · 자동화(n8n·Make)" data-bonus="3" aria-pressed="false">노션 · 자동화(n8n·Make)</button>
+      <button class="chip" type="button" data-tool="스마트스토어·쿠팡" data-bonus="1" aria-pressed="false">스마트스토어·쿠팡</button>
+      <button class="chip" type="button" data-tool="엑셀·스프레드시트" data-bonus="1" aria-pressed="false">엑셀·스프레드시트</button>
+      <button class="chip" type="button" data-tool="손으로 직접 (도구 없음)" data-bonus="3" aria-pressed="false">손으로 직접</button>
     </div>
+    <div class="chips-note">‘모바일 AI 에이전트 앱’은 폰에서 도는 AI 비서·자동화 앱입니다. 여러 개 골라도 대체율 보정은 최대 +10%p까지 반영됩니다.</div>
 
     <button class="go" id="goBtn" type="button">내 자동화 진단하기 →</button>
+    <div class="quickbar" aria-label="진단 없이 바로 보기">
+      <a class="qlink" href="https://1drv.ms/v/c/d7aced82112b68e7/IQAtv-NEF0TBTKCxfm5MxepvAegmUPIrIU6A-goisZYqW-o" target="_blank" rel="noopener">🎬 NEO AGENT 데모 영상 보기</a>
+      <span class="qsep" aria-hidden="true">·</span>
+      <a class="qlink" href="https://docs.google.com/forms/d/e/1FAIpQLSeAuLCuPClQBIzY2bXBtT8aA2WGsV0OXg2AxdpuU3iWIM9Vjw/viewform" target="_blank" rel="noopener">📝 1분 설문 &amp; 파일럿 신청</a>
+    </div>
     <div class="err hidden" id="errMsg" role="alert">1번에서 막혀 있는 업무를 하나 골라주세요.</div>
     <div class="micro">입력한 내용은 브라우저 안에서만 계산됩니다. 어디에도 전송·저장되지 않습니다.</div>
   </section>
@@ -299,7 +325,7 @@
           <button class="btn primary" id="copyBtn" type="button">📋 프롬프트 복사</button>
           <a class="btn" id="gptLink" href="https://chatgpt.com/" target="_blank" rel="noopener">챗지피티 열기 ↗</a>
         </div>
-        <div class="micro" id="copyHint">복사한 뒤 챗지피티에 그대로 붙여넣으면 됩니다.</div>
+        <div class="micro" id="copyHint">복사한 뒤 쓰시는 AI(챗지피티·제미나이·클로드 등)에 그대로 붙여넣으면 됩니다.</div>
       </div>
     </div>
 
@@ -364,6 +390,22 @@
 
   var state = { task:null, tools:[], hours:2 };
 
+  /* 도구별 대체율 보정(%p) — 쓸수록 자동화 여지가 크지만 상한을 둔다 */
+  var TOOL_BONUS = {
+    '챗지피티':2,
+    'OpenAI 코덱스(Codex)':3,
+    '제미나이(Gemini)':2,
+    '클로드 · 클로드 코드':3,
+    '피클(Pickle AI)':3,
+    '모바일 AI 에이전트 앱':2,
+    '노션 · 자동화(n8n·Make)':3,
+    '스마트스토어·쿠팡':1,
+    '엑셀·스프레드시트':1,
+    '손으로 직접 (도구 없음)':3
+  };
+  var BONUS_CAP = 10;
+  var MANUAL = '손으로 직접 (도구 없음)';
+
   /* theme */
   var themes = ['auto','dark','light'];
   var themeLabels = { auto:'◐ 자동', dark:'● 다크', light:'○ 라이트' };
@@ -402,7 +444,7 @@
     var on = b.getAttribute('aria-pressed') === 'true';
     b.setAttribute('aria-pressed', on ? 'false' : 'true');
     if (on) { state.tools = state.tools.filter(function(t){ return t !== v; }); }
-    else { if (state.tools.length >= 4) return; state.tools.push(v); }
+    else { state.tools.push(v); }
   });
 
   /* step 2 */
@@ -427,6 +469,19 @@
     var t = Object.assign({}, TASKS.etc);
     if (custom) { t.label = custom; t.verb = custom; }
     return t;
+  }
+
+  function toolBonus(){
+    var sum = 0;
+    state.tools.forEach(function(t){ sum += (TOOL_BONUS[t] || 0); });
+    return Math.min(BONUS_CAP, sum);
+  }
+  function promptTools(){
+    var pick = state.tools.filter(function(t){ return t !== MANUAL; });
+    if (state.tools.indexOf(MANUAL) > -1) {
+      pick.push(pick.length ? '일부는 아직 손으로 직접' : '손으로 직접 (도구 없음)');
+    }
+    return pick;
   }
 
   function buildPrompt(task, hours, tools, rate){
@@ -469,10 +524,9 @@
     el.err.classList.add('hidden');
 
     var hours = state.hours;
-    var rate = task.rate;
-    if (state.tools.indexOf('챗지피티') > -1) rate += 0.02;
-    if (state.tools.indexOf('손으로 직접 (도구 없음)') > -1) rate += 0.03;
-    rate = Math.min(0.90, Math.round(rate*100)/100);
+    var baseRate = task.rate;
+    var bonus = toolBonus();
+    var rate = Math.min(0.90, Math.round((baseRate + bonus/100)*100)/100);
 
     var monthHours = hours*22;
     var saved = monthHours*rate;
@@ -488,16 +542,19 @@
     el.kSaved.innerHTML = fmtHours(saved) + '<small>시간</small>';
     el.kSavedFoot.textContent = '하루 ' + fmtHours(daySaved) + '시간 회수 · 연 ' + fmtHours(saved*12) + '시간';
 
+    var calcNote = [];
+    if (bonus > 0) calcNote.push('기본 ' + Math.round(baseRate*100) + '% + 쓰는 도구 보정 +' + bonus + '%p');
+    if (rate >= 0.90) calcNote.push('대체율 상한 90% 적용');
     el.formula.innerHTML = '계산 근거 · 하루 ' + fmtHours(hours) + '시간 × 월 22일 × 대체율 ' + Math.round(rate*100) + '% = <code>월 ' + fmtHours(saved) + '시간</code>'
-      + (rate > task.rate ? ' (기본 '+Math.round(task.rate*100)+'% + 쓰는 도구 보정 +'+Math.round((rate-task.rate)*100)+'%p)' : '')
+      + (calcNote.length ? '<br>(' + calcNote.join(' · ') + ')' : '')
       + '<br>업무별 기본 대체율은 반복 구간의 비중을 기준으로 잡은 추정치입니다. 실제 절감은 업무 환경에 따라 달라집니다.';
 
-    el.promptText.textContent = buildPrompt(task, hours, state.tools, rate);
+    el.promptText.textContent = buildPrompt(task, hours, promptTools(), rate);
 
     el.result.classList.remove('hidden');
     el.copyBtn.textContent = '📋 프롬프트 복사';
     el.copyBtn.classList.remove('copied');
-    el.copyHint.textContent = '복사한 뒤 챗지피티에 그대로 붙여넣으면 됩니다.';
+    el.copyHint.textContent = '복사한 뒤 쓰시는 AI에 그대로 붙여넣으면 됩니다.';
     setTimeout(function(){
       el.result.scrollIntoView({behavior:'smooth', block:'start'});
     }, 40);
@@ -527,7 +584,7 @@
       if (ok) {
         el.copyBtn.textContent = '✓ 복사됨';
         el.copyBtn.classList.add('copied');
-        el.copyHint.textContent = '이제 챗지피티에 붙여넣고, 첫 답변만 받아보세요.';
+        el.copyHint.textContent = '이제 쓰시는 AI에 붙여넣고, 첫 답변만 받아보세요.';
         setTimeout(function(){
           el.copyBtn.textContent = '📋 프롬프트 복사';
           el.copyBtn.classList.remove('copied');
