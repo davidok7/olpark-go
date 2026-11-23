@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>1인 대표 AI 자동화 10초 진단기 | NEO AGENT</title>
+<meta name="description" content="막혀 있는 반복 업무·하루 소요 시간·쓰는 도구 3가지만 고르면, AI 대체 가능 비율과 월 절약 시간, 바로 쓸 수 있는 합본 프롬프트를 만들어 드립니다.">
+<meta property="og:title" content="1인 대표 AI 자동화 10초 진단기">
+<meta property="og:description" content="3가지만 고르면 월 절약 시간과 바로 쓰는 프롬프트가 나옵니다. NEO AGENT.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#0b0d12;
+    --bg-soft:#12151d;
+    --card:#151922;
+    --card-2:#1b202b;
+    --line:#262c39;
+    --text:#eef1f7;
+    --muted:#9aa4b8;
+    --brand:#6c8cff;
+    --brand-2:#8f6cff;
+    --mint:#3ddc97;
+    --warn:#ffb454;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --radius:18px;
+  }
+  html[data-theme="light"]{
+    --bg:#f5f6fa;
+    --bg-soft:#ffffff;
+    --card:#ffffff;
+    --card-2:#f2f4f9;
+    --line:#e2e6ef;
+    --text:#141824;
+    --muted:#5f6b80;
+    --brand:#3f5ef0;
+    --brand-2:#7a4bff;
+    --mint:#0f9d63;
+    --warn:#b26b00;
+    --shadow:0 14px 40px rgba(24,32,54,.10);
+  }
+  @media (prefers-color-scheme: light){
+    html[data-theme="auto"]{
+      --bg:#f5f6fa; --bg-soft:#ffffff; --card:#ffffff; --card-2:#f2f4f9;
+      --line:#e2e6ef; --text:#141824; --muted:#5f6b80;
+      --brand:#3f5ef0; --brand-2:#7a4bff; --mint:#0f9d63; --warn:#b26b00;
+      --shadow:0 14px 40px rgba(24,32,54,.10);
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1100px 520px at 12% -8%, rgba(108,140,255,.20), transparent 60%),
+      radial-gradient(900px 460px at 92% 4%, rgba(143,108,255,.16), transparent 62%),
+      var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    -webkit-text-size-adjust:100%;
+    padding:0 0 56px;
+  }
+  .wrap{width:100%;max-width:720px;margin:0 auto;padding:0 18px}
+  header{padding:26px 0 6px}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .logo{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.02em;font-size:15px}
+  .logo .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 14px rgba(108,140,255,.9)}
+  .logo small{color:var(--muted);font-weight:600;font-size:12px}
+  .themebtn{
+    appearance:none;border:1px solid var(--line);background:var(--card);color:var(--muted);
+    border-radius:999px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;
+  }
+  .themebtn:active{transform:scale(.97)}
+  .hero{padding:22px 0 4px}
+  .kicker{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:12px;font-weight:800;letter-spacing:.02em;color:var(--brand);
+    background:rgba(108,140,255,.12);border:1px solid rgba(108,140,255,.28);
+    padding:5px 11px;border-radius:999px;margin-bottom:14px;
+  }
+  html[data-theme="light"] .kicker{background:rgba(63,94,240,.08)}
+  h1{font-size:clamp(26px,7.4vw,38px);line-height:1.25;letter-spacing:-.035em;margin:0 0 10px;font-weight:850}
+  h1 .grad{background:linear-gradient(120deg,var(--brand),var(--brand-2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:15px;margin:0 0 4px;letter-spacing:-.01em}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px;margin-top:16px;box-shadow:var(--shadow);
+  }
+  .step{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .num{
+    flex:0 0 auto;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;font-size:13px;font-weight:800;
+  }
+  .step h2{font-size:15.5px;margin:0;letter-spacing:-.02em;font-weight:800}
+  .step .hint{color:var(--muted);font-size:12.5px;font-weight:600;margin-left:auto}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    appearance:none;cursor:pointer;font-family:inherit;
+    border:1px solid var(--line);background:var(--card-2);color:var(--text);
+    padding:11px 14px;border-radius:12px;font-size:14px;font-weight:650;letter-spacing:-.01em;
+    transition:border-color .15s, background .15s, transform .08s;
+    min-height:46px;display:inline-flex;align-items:center;gap:7px;
+  }
+  .chip:active{transform:scale(.985)}
+  .chip[aria-pressed="true"]{
+    border-color:transparent;color:#fff;
+    background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    box-shadow:0 8px 22px rgba(108,140,255,.35);
+  }
+  html[data-theme="light"] .chip[aria-pressed="true"]{color:#fff}
+  .chip.flagged{outline:2px solid var(--warn);outline-offset:2px}
+  .input{
+    width:100%;margin-top:10px;padding:13px 14px;border-radius:12px;font:inherit;font-size:14.5px;
+    background:var(--card-2);color:var(--text);border:1px solid var(--line);
+  }
+  .input:focus{outline:2px solid rgba(108,140,255,.55);outline-offset:1px;border-color:transparent}
+  .hidden{display:none !important}
+  .range-head{display:flex;align-items:baseline;justify-content:space-between;margin:2px 0 6px}
+  .range-val{font-size:30px;font-weight:850;letter-spacing:-.04em}
+  .range-val span{font-size:14px;font-weight:700;color:var(--muted);margin-left:4px}
+  .range-note{color:var(--muted);font-size:12.5px;font-weight:650}
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:34px;background:transparent;margin:0;
+  }
+  input[type=range]::-webkit-slider-runnable-track{
+    height:8px;border-radius:99px;
+    background:linear-gradient(90deg,var(--brand) 0%,var(--brand-2) var(--fill,40%), var(--line) var(--fill,40%));
+  }
+  input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:var(--line)}
+  input[type=range]::-moz-range-progress{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--brand),var(--brand-2))}
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;margin-top:-9px;
+    border:4px solid var(--brand);box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid var(--brand);cursor:pointer;
+  }
+  .scale{display:flex;justify-content:space-between;color:var(--muted);font-size:11.5px;font-weight:650;margin-top:2px}
+  .go{
+    display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:18px;
+    appearance:none;cursor:pointer;font-family:inherit;font-size:16.5px;font-weight:850;letter-spacing:-.02em;
+    color:#fff;border:0;border-radius:15px;padding:17px 18px;min-height:56px;
+    background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    box-shadow:0 14px 34px rgba(108,140,255,.38);
+    transition:transform .08s, filter .15s;
+  }
+  .go:active{transform:scale(.99);filter:brightness(1.05)}
+  .micro{text-align:center;color:var(--muted);font-size:12px;margin-top:10px;font-weight:600}
+  /* result */
+  #result{margin-top:20px}
+  .reveal{animation:rise .45s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .reshead{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  .reshead .tag{
+    font-size:11.5px;font-weight:800;color:var(--mint);border:1px solid rgba(61,220,151,.35);
+    background:rgba(61,220,151,.10);padding:4px 9px;border-radius:999px;
+  }
+  .reshead h2{font-size:18px;margin:0;letter-spacing:-.03em;font-weight:850}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  @media (max-width:400px){.kpis{grid-template-columns:1fr}}
+  .kpi{background:var(--card-2);border:1px solid var(--line);border-radius:14px;padding:14px}
+  .kpi .lab{font-size:12px;font-weight:750;color:var(--muted);letter-spacing:-.01em}
+  .kpi .val{font-size:29px;font-weight:850;letter-spacing:-.045em;margin-top:3px;line-height:1.15}
+  .kpi .val.big{font-size:34px;color:var(--mint)}
+  .kpi .val small{font-size:13.5px;font-weight:750;color:var(--muted);margin-left:3px;letter-spacing:0}
+  .kpi .foot{font-size:12px;color:var(--muted);font-weight:600;margin-top:4px}
+  .formula{margin-top:12px;font-size:12.5px;color:var(--muted);font-weight:620;line-height:1.65}
+  .formula code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;
+    background:var(--card-2);border:1px solid var(--line);padding:1px 6px;border-radius:6px;color:var(--text);
+  }
+  .promptbox{margin-top:16px}
+  .promptbox .ptitle{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .promptbox h3{font-size:15px;margin:0;letter-spacing:-.02em;font-weight:800}
+  pre#promptText{
+    margin:0;padding:15px;border-radius:13px;background:#0a0c11;color:#e8ecf6;
+    border:1px solid var(--line);font-size:12.5px;line-height:1.7;white-space:pre-wrap;word-break:break-word;
+    max-height:340px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,"D2Coding",monospace;
+  }
+  html[data-theme="light"] pre#promptText{background:#0e1220}
+  .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+  @media (max-width:400px){.btnrow{grid-template-columns:1fr}}
+  .btn{
+    appearance:none;cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:800;letter-spacing:-.01em;
+    border-radius:13px;padding:14px 14px;min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border:1px solid var(--line);background:var(--card-2);color:var(--text);text-decoration:none;
+    transition:transform .08s, background .15s, border-color .15s;
+  }
+  .btn:active{transform:scale(.99)}
+  .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border-color:transparent;box-shadow:0 10px 26px rgba(108,140,255,.32)}
+  .btn.mint{background:var(--mint);color:#04231a;border-color:transparent;box-shadow:0 10px 26px rgba(61,220,151,.25)}
+  html[data-theme="light"] .btn.mint{color:#fff;background:#0f9d63}
+  .btn.ghost{background:transparent}
+  .copied{color:var(--mint) !important;border-color:rgba(61,220,151,.5) !important}
+  /* CTA */
+  .cta{
+    margin-top:22px;border-radius:20px;padding:20px;
+    background:linear-gradient(160deg,rgba(108,140,255,.16),rgba(143,108,255,.10) 55%,transparent);
+    border:1px solid rgba(108,140,255,.30);
+  }
+  .cta h2{font-size:19px;margin:0 0 10px;letter-spacing:-.03em;font-weight:850}
+  .cta p{margin:0 0 9px;font-size:14.5px;color:var(--text);opacity:.92}
+  .cta p.dim{color:var(--muted);font-size:13px}
+  .ctabtns{display:grid;gap:9px;margin-top:14px}
+  .foot{margin-top:26px;text-align:center;color:var(--muted);font-size:12px;line-height:1.8}
+  .foot a{color:var(--muted)}
+  .err{color:var(--warn);font-size:12.5px;font-weight:750;margin-top:10px}
+  ::selection{background:rgba(108,140,255,.35)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="bar">
+      <div class="logo"><span class="dot"></span>NEO AGENT <small>네오에이전트</small></div>
+      <button class="themebtn" id="themeBtn" type="button" aria-label="화면 밝기 전환">◐ 자동</button>
+    </div>
+    <div class="hero">
+      <div class="kicker">⏱ 10초 진단 · 설치 없음</div>
+      <h1>1인 대표<br><span class="grad">AI 자동화 10초 진단기</span></h1>
+      <p class="sub">막혀 있는 반복 업무 3가지만 고르면 — AI로 돌려받을 수 있는 시간과, 오늘 바로 챗지피티에 붙여넣을 <b>합본 프롬프트</b>가 나옵니다.</p>
+    </div>
+  </header>
+
+  <section class="card" aria-label="진단 입력">
+    <div class="step">
+      <div class="num">1</div>
+      <h2>지금 막혀 있는 반복 업무</h2>
+      <div class="hint">1개 선택</div>
+    </div>
+    <div class="chips" id="taskChips" role="group" aria-label="반복 업무 선택">
+      <button class="chip" type="button" data-task="detail" aria-pressed="false">🖼 상세페이지·콘텐츠</button>
+      <button class="chip" type="button" data-task="cs" aria-pressed="false">💬 CS·문의 답변</button>
+      <button class="chip" type="button" data-task="ops" aria-pressed="false">🧾 주문·정산·엑셀</button>
+      <button class="chip" type="button" data-task="shorts" aria-pressed="false">🎬 쇼츠·영상 콘텐츠</button>
+      <button class="chip" type="button" data-task="etc" aria-pressed="false">✍️ 기타 직접 입력</button>
+    </div>
+    <input class="input hidden" id="etcInput" type="text" maxlength="60" placeholder="예: 매일 아침 경쟁사 가격 20개 비교해서 표로 정리" aria-label="기타 업무 직접 입력">
+
+    <div class="step" style="margin-top:20px">
+      <div class="num">2</div>
+      <h2>그 업무에 드는 하루 시간</h2>
+      <div class="hint">월 22일 기준</div>
+    </div>
+    <div class="range-head">
+      <div class="range-val" id="hoursVal">2시간<span> / 하루</span></div>
+      <div class="range-note" id="monthRaw">월 44시간 사용 중</div>
+    </div>
+    <input type="range" id="hours" min="0.5" max="5" step="0.5" value="2" aria-label="하루 소요 시간" style="--fill:30%">
+    <div class="scale"><span>30분</span><span>1시간</span><span>2시간</span><span>3시간</span><span>4시간</span><span>5시간</span></div>
+
+    <div class="step" style="margin-top:20px">
+      <div class="num">3</div>
+      <h2>지금 쓰는 도구</h2>
+      <div class="hint">복수 선택 가능</div>
+    </div>
+    <div class="chips" id="toolChips" role="group" aria-label="사용 중인 도구 선택">
+      <button class="chip" type="button" data-tool="스마트스토어·쿠팡" aria-pressed="false">스마트스토어·쿠팡</button>
+      <button class="chip" type="button" data-tool="엑셀·스프레드시트" aria-pressed="false">엑셀·스프레드시트</button>
+      <button class="chip" type="button" data-tool="챗지피티" aria-pressed="false">챗지피티</button>
+      <button class="chip" type="button" data-tool="손으로 직접 (도구 없음)" aria-pressed="false">손으로 직접</button>
+    </div>
+
+    <button class="go" id="goBtn" type="button">내 자동화 진단하기 →</button>
+    <div class="err hidden" id="errMsg" role="alert">1번에서 막혀 있는 업무를 하나 골라주세요.</div>
+    <div class="micro">입력한 내용은 브라우저 안에서만 계산됩니다. 어디에도 전송·저장되지 않습니다.</div>
+  </section>
+
+  <section id="result" class="hidden" aria-live="polite">
+    <div class="card reveal">
+      <div class="reshead">
+        <span class="tag">진단 완료</span>
+        <h2 id="resTitle">상세페이지·콘텐츠 제작</h2>
+      </div>
+      <p class="sub" id="resLine" style="font-size:14px;margin:6px 0 0"></p>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="lab">AI 대체 가능 비율</div>
+          <div class="val" id="kRate">70<small>%</small></div>
+          <div class="foot" id="kRateFoot">사람은 판단·검수만</div>
+        </div>
+        <div class="kpi">
+          <div class="lab">월 절약 가능 시간</div>
+          <div class="val big" id="kSaved">30.8<small>시간</small></div>
+          <div class="foot" id="kSavedFoot">하루 2.0시간 회수</div>
+        </div>
+      </div>
+
+      <div class="formula" id="formula"></div>
+
+      <div class="promptbox">
+        <div class="ptitle">
+          <h3>🎯 내 상황이 채워진 합본 프롬프트</h3>
+        </div>
+        <pre id="promptText"></pre>
+        <div class="btnrow">
+          <button class="btn primary" id="copyBtn" type="button">📋 프롬프트 복사</button>
+          <a class="btn" id="gptLink" href="https://chatgpt.com/" target="_blank" rel="noopener">챗지피티 열기 ↗</a>
+        </div>
+        <div class="micro" id="copyHint">복사한 뒤 챗지피티에 그대로 붙여넣으면 됩니다.</div>
+      </div>
+    </div>
+
+    <div class="card cta reveal" style="animation-delay:.06s">
+      <h2>여기까지가 '혼자 하는 자동화'의 한계입니다</h2>
+      <p>지금은 복붙해서 직접 돌리셔야 하고, 대화가 끊기면 어제 하던 일을 다시 설명해야 합니다.</p>
+      <p>이 <b>'멈춘 업무 이어받기'</b>를 AI 직원들이 백그라운드에서 처리하고, 대표는 <b>모바일로 결재만 올리게</b> 만든 게 <b>NEO AGENT</b>입니다.</p>
+      <p class="dim">결재는 승인/반려 두 버튼. 결과물과 근거는 자동으로 쌓입니다.</p>
+      <div class="ctabtns">
+        <a class="btn mint" href="https://docs.google.com/forms/d/e/1FAIpQLSeAuLCuPClQBIzY2bXBtT8aA2WGsV0OXg2AxdpuU3iWIM9Vjw/viewform" target="_blank" rel="noopener">📝 1분 설문 &amp; 무료 파일럿·MOU 신청 →</a>
+        <a class="btn" href="https://1drv.ms/v/c/d7aced82112b68e7/IQAtv-NEF0TBTKCxfm5MxepvAegmUPIrIU6A-goisZYqW-o" target="_blank" rel="noopener">▶ 데모 영상 보기 (모바일 결재 화면)</a>
+      </div>
+      <div class="micro" style="margin-top:10px">설문은 6문항·1분. 연락처는 파일럿·MOU 안내에만 쓰고 종료 후 파기합니다.</div>
+    </div>
+  </section>
+
+  <div class="foot">
+    NEO AGENT · 네오에이전트 — 1인 대표의 반복 업무를 AI 직원에게 넘기는 회사<br>
+    문의 <a href="https://www.threads.net/@david.ok" target="_blank" rel="noopener">스레드 @david.ok</a> · 진단 수치는 입력값 기준 추정치입니다.
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var TASKS = {
+    detail: { label:'상세페이지·콘텐츠 제작', rate:0.70, verb:'상세페이지·콘텐츠 만들기',
+      pieces:['경쟁사 상세페이지 3~5개 뜯어보기','상품 특징 → 카피·문구 다듬기','이미지·섹션 순서 잡기','올리고 나서 수정·재업로드'] },
+    cs: { label:'CS·문의 답변', rate:0.65, verb:'고객 문의 답변',
+      pieces:['문의 읽고 유형 분류','답변 문장 쓰기','배송·교환 정책 확인','같은 질문 반복 응대'] },
+    ops: { label:'주문·정산·엑셀 정리', rate:0.80, verb:'주문·정산 정리',
+      pieces:['주문서 복사·붙여넣기','택배사·송장 대조','정산 금액 맞춰보기','엑셀 함수로 표 정리'] },
+    shorts: { label:'쇼츠·영상 콘텐츠 기획·편집', rate:0.60, verb:'쇼츠 기획·편집',
+      pieces:['소재·키워드 찾기','대본·후킹 첫 문장 쓰기','자막·컷 편집','업로드 문구·해시태그'] },
+    etc: { label:'기타 반복 업무', rate:0.55, verb:'반복 업무',
+      pieces:['자료 찾아 모으기','비교·정리하기','보고서·표 만들기','매번 같은 형식으로 다시 쓰기'] }
+  };
+
+  var el = {
+    taskChips: document.getElementById('taskChips'),
+    toolChips: document.getElementById('toolChips'),
+    etcInput: document.getElementById('etcInput'),
+    hours: document.getElementById('hours'),
+    hoursVal: document.getElementById('hoursVal'),
+    monthRaw: document.getElementById('monthRaw'),
+    goBtn: document.getElementById('goBtn'),
+    err: document.getElementById('errMsg'),
+    result: document.getElementById('result'),
+    resTitle: document.getElementById('resTitle'),
+    resLine: document.getElementById('resLine'),
+    kRate: document.getElementById('kRate'),
+    kRateFoot: document.getElementById('kRateFoot'),
+    kSaved: document.getElementById('kSaved'),
+    kSavedFoot: document.getElementById('kSavedFoot'),
+    formula: document.getElementById('formula'),
+    promptText: document.getElementById('promptText'),
+    copyBtn: document.getElementById('copyBtn'),
+    copyHint: document.getElementById('copyHint'),
+    themeBtn: document.getElementById('themeBtn')
+  };
+
+  var state = { task:null, tools:[], hours:2 };
+
+  /* theme */
+  var themes = ['auto','dark','light'];
+  var themeLabels = { auto:'◐ 자동', dark:'● 다크', light:'○ 라이트' };
+  var saved = null;
+  try { saved = localStorage.getItem('neo-theme'); } catch(e){}
+  if (saved && themes.indexOf(saved) > -1) setTheme(saved, false);
+  function setTheme(t, store){
+    document.documentElement.setAttribute('data-theme', t);
+    el.themeBtn.textContent = themeLabels[t];
+    if (store !== false) { try { localStorage.setItem('neo-theme', t); } catch(e){} }
+  }
+  el.themeBtn.addEventListener('click', function(){
+    var now = document.documentElement.getAttribute('data-theme') || 'auto';
+    setTheme(themes[(themes.indexOf(now) + 1) % themes.length]);
+  });
+
+  /* step 1 */
+  el.taskChips.addEventListener('click', function(e){
+    var b = e.target.closest('.chip'); if(!b) return;
+    var key = b.dataset.task;
+    state.task = key;
+    Array.prototype.forEach.call(el.taskChips.children, function(c){
+      c.setAttribute('aria-pressed', c === b ? 'true' : 'false');
+      c.classList.remove('flagged');
+    });
+    el.err.classList.add('hidden');
+    var isEtc = key === 'etc';
+    el.etcInput.classList.toggle('hidden', !isEtc);
+    if (isEtc) setTimeout(function(){ el.etcInput.focus(); }, 60);
+  });
+
+  /* step 3 */
+  el.toolChips.addEventListener('click', function(e){
+    var b = e.target.closest('.chip'); if(!b) return;
+    var v = b.dataset.tool;
+    var on = b.getAttribute('aria-pressed') === 'true';
+    b.setAttribute('aria-pressed', on ? 'false' : 'true');
+    if (on) { state.tools = state.tools.filter(function(t){ return t !== v; }); }
+    else { if (state.tools.length >= 4) return; state.tools.push(v); }
+  });
+
+  /* step 2 */
+  function fmtHours(n){
+    return (Math.round(n*10)/10).toFixed(1).replace(/\.0$/,'');
+  }
+  function syncHours(){
+    var v = parseFloat(el.hours.value);
+    state.hours = v;
+    var pct = (v - 0.5) / 4.5 * 100;
+    el.hours.style.setProperty('--fill', pct + '%');
+    el.hoursVal.innerHTML = (Number.isInteger(v) ? v : v.toFixed(1)) + '시간<span> / 하루</span>';
+    el.monthRaw.textContent = '월 ' + fmtHours(v*22) + '시간 사용 중';
+  }
+  el.hours.addEventListener('input', syncHours);
+  syncHours();
+
+  function currentTask(){
+    if (!state.task) return null;
+    if (state.task !== 'etc') return TASKS[state.task];
+    var custom = (el.etcInput.value || '').trim();
+    var t = Object.assign({}, TASKS.etc);
+    if (custom) { t.label = custom; t.verb = custom; }
+    return t;
+  }
+
+  function buildPrompt(task, hours, tools, rate){
+    var toolStr = tools.length ? tools.join(', ') : '따로 없음(손으로 직접)';
+    var monthH = fmtHours(hours*22);
+    var monthSaved = fmtHours(hours*22*rate);
+    return [
+      '너는 1인 셀러·1인 대표의 반복 업무를 대신 처리하는 실무 파트너다. 아래 내 상황을 읽고, 내가 설명한 내용과 네가 자료에서 직접 확인한 내용을 구분해서 1. [시간 진단] 2. [바로 쓰는 결과물 1개(초안·샘플·전용 프롬프트)] 3. [완전 자동화 설계도 3단계 & 통과 기준 3개] 4. [이어받기 메모 3줄]로 답해줘.',
+      '',
+      '[내 상황]',
+      '- 막혀 있는 반복 업무: ' + task.label,
+      '- 하루 소요 시간: 약 ' + fmtHours(hours) + '시간 (월 22일 기준 월 ' + monthH + '시간)',
+      '- 지금 쓰는 도구: ' + toolStr,
+      '- 목표: 이 업무에 내가 직접 손대는 시간을 줄이고, 결과물은 내가 검토·승인만 하는 구조로 바꾸기',
+      '',
+      '[요청]',
+      '1. [시간 진단] 이 업무에서 지금 새는 시간을 항목별로 쪼개고, AI가 줄일 수 있는 시간과 내가 남겨야 할 시간을 숫자로 구분해줘. 내가 적은 하루 ' + fmtHours(hours) + '시간이 어디로 가는지 먼저 보여줘.',
+      '2. [바로 쓰는 결과물 1개] 내 상황에 맞는 결과물 하나를 지금 바로 쓸 수 있는 완성 형태로 만들어줘. 초안·샘플·전용 프롬프트 중 가장 효과가 큰 1개만 골라서, 복사해서 바로 쓸 수 있게 써줘.',
+      '3. [완전 자동화 설계도 3단계 & 통과 기준 3개] 3단계로 나누고, 각 단계마다 "이게 되면 통과"라고 판정할 수 있는 기준을 3개씩 제시해줘. 도구는 내가 지금 쓰는 것(' + toolStr + ')을 기준으로 현실적으로 짜줘.',
+      '4. [이어받기 메모 3줄] 내가 다음에 이 대화를 이어받을 때 필요한 맥락 3줄. (지금까지 정한 것 / 아직 안 정한 것 / 다음에 물어볼 것)',
+      '',
+      '[조건]',
+      '- 확인하지 않은 수치·사례·출처를 지어내지 말고, 모르면 "확인 필요"라고 표시해줘.',
+      '- 일반론보다 내 업무("' + task.verb + '")에 바로 붙는 문장과 양식으로 써줘.',
+      '- 내가 이미 쓰는 도구를 다시 사라고 하지 말고, 있는 것 조합으로 설계해줘.',
+      '- 마지막에 "오늘 30분 안에 할 1가지"를 한 줄로 정해줘.'
+    ].join('\n');
+  }
+
+  function diagnose(){
+    var task = currentTask();
+    if (!task) {
+      el.err.classList.remove('hidden');
+      Array.prototype.forEach.call(el.taskChips.children, function(c){ c.classList.add('flagged'); });
+      el.result.classList.add('hidden');
+      el.taskChips.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    el.err.classList.add('hidden');
+
+    var hours = state.hours;
+    var rate = task.rate;
+    if (state.tools.indexOf('챗지피티') > -1) rate += 0.02;
+    if (state.tools.indexOf('손으로 직접 (도구 없음)') > -1) rate += 0.03;
+    rate = Math.min(0.90, Math.round(rate*100)/100);
+
+    var monthHours = hours*22;
+    var saved = monthHours*rate;
+    var daySaved = hours*rate;
+
+    el.resTitle.textContent = task.label;
+    el.resLine.innerHTML = '하루 <b>' + fmtHours(hours) + '시간</b> 중 <b>' + fmtHours(daySaved) + '시간</b>을 AI가 가져갑니다. 남는 시간은 판단과 검수에 쓰시면 됩니다.';
+
+    el.kRate.innerHTML = Math.round(rate*100) + '<small>%</small>';
+    el.kRateFoot.textContent = rate >= 0.75 ? '거의 전부 AI, 사람은 승인만'
+      : rate >= 0.65 ? '초안·정리는 AI, 판단은 사람'
+      : '반복 구간만 AI, 기획은 사람';
+    el.kSaved.innerHTML = fmtHours(saved) + '<small>시간</small>';
+    el.kSavedFoot.textContent = '하루 ' + fmtHours(daySaved) + '시간 회수 · 연 ' + fmtHours(saved*12) + '시간';
+
+    el.formula.innerHTML = '계산 근거 · 하루 ' + fmtHours(hours) + '시간 × 월 22일 × 대체율 ' + Math.round(rate*100) + '% = <code>월 ' + fmtHours(saved) + '시간</code>'
+      + (rate > task.rate ? ' (기본 '+Math.round(task.rate*100)+'% + 쓰는 도구 보정 +'+Math.round((rate-task.rate)*100)+'%p)' : '')
+      + '<br>업무별 기본 대체율은 반복 구간의 비중을 기준으로 잡은 추정치입니다. 실제 절감은 업무 환경에 따라 달라집니다.';
+
+    el.promptText.textContent = buildPrompt(task, hours, state.tools, rate);
+
+    el.result.classList.remove('hidden');
+    el.copyBtn.textContent = '📋 프롬프트 복사';
+    el.copyBtn.classList.remove('copied');
+    el.copyHint.textContent = '복사한 뒤 챗지피티에 그대로 붙여넣으면 됩니다.';
+    setTimeout(function(){
+      el.result.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 40);
+  }
+
+  el.goBtn.addEventListener('click', diagnose);
+
+  /* copy */
+  function legacyCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly','');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  el.copyBtn.addEventListener('click', function(){
+    var text = el.promptText.textContent || '';
+    function done(ok){
+      if (ok) {
+        el.copyBtn.textContent = '✓ 복사됨';
+        el.copyBtn.classList.add('copied');
+        el.copyHint.textContent = '이제 챗지피티에 붙여넣고, 첫 답변만 받아보세요.';
+        setTimeout(function(){
+          el.copyBtn.textContent = '📋 프롬프트 복사';
+          el.copyBtn.classList.remove('copied');
+        }, 2600);
+      } else {
+        el.copyHint.textContent = '자동 복사가 막혔습니다. 프롬프트를 길게 눌러 직접 복사해 주세요.';
+      }
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(legacyCopy(text)); });
+    } else {
+      done(legacyCopy(text));
+    }
+  });
+})();
+</script>
+</body>
+</html>
